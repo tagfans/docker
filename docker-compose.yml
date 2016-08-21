@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+
+  node:
+    container_name: "tagfans"
+    build:
+      context: ./node
+    volumes:
+      - ../:/app
+    expose:
+      - "9000"
+    ports:
+      - "5000:80"
+    links:
+      - redis
+      - mysql
+
+  mysql:
+    build:
+      context: ./mysql
+    image: mysql:latest
+    volumes_from:
+      - data
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: tagfans
+      MYSQL_USER: tagfans
+      MYSQL_PASSWORD: tagfans
+      MYSQL_ROOT_PASSWORD: tagfans
+
+  redis:
+    build: ./redis
+    volumes_from:
+      - data
+    ports:
+      - "6378:6379"
+
+  data:
+    build: ./data
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/redis:/data
