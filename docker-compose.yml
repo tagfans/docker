@@ -19,7 +19,6 @@ services:
   mysql:
     build:
       context: ./mysql
-    image: mysql:latest
     volumes_from:
       - data
     ports:
