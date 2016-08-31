@@ -16,6 +16,16 @@ $ git clone https://github.com/tagfans/docker.git
 $ cd docker
 ```
 
+### Import MySQL Data
+
+Open your terminal and execute the following command.
+
+```bash
+$ mysql -h 127.0.0.1 -u tagfans -p tagfans < db.sql
+```
+
+default password is `tagfans`.
+
 ### Start container
 
 Start all application containers (Node, Mysql and Redis)
