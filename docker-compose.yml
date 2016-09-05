@@ -19,7 +19,7 @@ services:
     build:
       context: ./mysql
     volumes_from:
-      - data
+      - volumes_data
     ports:
       - "3306:3306"
     environment:
@@ -31,12 +31,27 @@ services:
   redis:
     build: ./redis
     volumes_from:
-      - data
+      - volumes_data
     ports:
       - "6378:6379"
 
-  data:
+  phpmyadmin:
+    build: ./phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      MYSQL_USER: tagfans
+      MYSQL_PASSWORD: tagfans
+      MYSQL_ROOT_PASSWORD: tagfans
+    volumes_from:
+      - volumes_data
+    ports:
+      - "8080:80"
+    links:
+      - "mysql:db"
+
+  volumes_data:
     build: ./data
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./data/redis:/data
+      - ./data/sessions:/sessions
