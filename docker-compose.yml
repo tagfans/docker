@@ -50,7 +50,7 @@ services:
       - "mysql:db"
 
   volumes_data:
-    build: ./data
+    image: tianon/true
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./data/redis:/data
