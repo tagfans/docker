@@ -14,6 +14,8 @@ services:
     links:
       - redis
       - mysql
+    # for production mode
+    # restart: always
 
   mysql:
     build:
@@ -27,6 +29,8 @@ services:
       MYSQL_USER: tagfans
       MYSQL_PASSWORD: tagfans
       MYSQL_ROOT_PASSWORD: tagfans
+    # for production mode
+    # restart: always
 
   redis:
     build: ./redis
@@ -34,6 +38,8 @@ services:
       - volumes_data
     ports:
       - "6378:6379"
+    # for production mode
+    # restart: always
 
   phpmyadmin:
     build: ./phpmyadmin
